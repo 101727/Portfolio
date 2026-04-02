@@ -1,0 +1,712 @@
+/* ===== PORTFOLIO CSS ===== */
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Hoofdkleur voor knoppen, accenten en randen */
+    --primary-color: #e31e24;
+    /* Secundaire highlightkleur voor contrast */
+    --secondary-color: #ffd700;
+    /* Algemene achtergrondkleur van de site */
+    --dark-bg: #0a0a0a;
+    /* Achtergrondkleur voor kaarten en panelen */
+    --card-bg: #1a1a1a;
+    /* Standaard tekstkleur */
+    --text-color: #ffffff;
+    /* Extra gloedkleur voor effecten */
+    --accent-glow: #ff0044;
+}
+
+/* Basisstijl voor de hele pagina */
+body {
+    font-family: 'Arial', sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Centrale wrapper met vaste max-breedte */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== LOADING SCREEN ===== */
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #181818 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.loading-screen.hidden {
+    /* State na laden: transparant en onzichtbaar */
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Container van spinner + tekst */
+.loader {
+    text-align: center;
+}
+
+/* Visuele spinner-ring */
+.loader-ring {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.15);
+    border-top-color: var(--primary-color);
+    border-right-color: var(--secondary-color);
+    animation: spin 0.9s linear infinite;
+}
+
+/* Tekst onder de spinner */
+.loading-text {
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: #d9d9d9;
+}
+
+/* ===== NAVIGATION ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 2px solid var(--primary-color);
+    animation: slideDown 0.5s ease;
+}
+
+.nav-logo {
+    /* Site/brand titel links in de navbar */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Navigatie links naast elkaar */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+/* Stijl van individuele navigatielinks */
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+}
+
+/* Onderstreep-animatie onder nav links */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    width: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    /* Volledige viewport-hoogte voor introductie */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Geanimeerde achtergrondlaag achter de hero content */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(227, 30, 36, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+    animation: energyMove 10s ease-in-out infinite;
+}
+
+/* Tekstblok in het midden van de hero */
+.hero-content {
+    text-align: center;
+    z-index: 1;
+    animation: heroAppear 1s ease;
+}
+
+/* Naam/titel op de homepage */
+.hero-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    animation: titleFloat 3s ease-in-out infinite;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+
+/* Korte introductiezin onder de titel */
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin: 20px 0 40px;
+    color: #aaa;
+}
+
+/* Rij met hero-knoppen */
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Primaire call-to-action knopstijl */
+.btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-glow));
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    box-shadow: 0 0 20px rgba(227, 30, 36, 0.5);
+}
+
+/* Lichtreflectie-effect op knop hover */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(227, 30, 36, 0.8);
+}
+
+.btn-outline {
+    /* Tweede knopvariant met transparante achtergrond */
+    background: transparent;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: rgba(227, 30, 36, 0.2);
+}
+
+/* ===== FEATURES SECTION ===== */
+.features {
+    padding: 100px 0;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--card-bg) 100%);
+}
+
+.features .container {
+    /* Cards in responsieve gridkolommen */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Feature kaart basisstijl */
+.feature-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    animation: cardFloat 3s ease-in-out infinite;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.feature-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 40px rgba(227, 30, 36, 0.3);
+    transform: translateY(-15px) !important;
+}
+
+.card-icon {
+    /* Groot icoon boven de feature-titel */
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+/* ===== HOME EXTRA CONTENT ===== */
+.motivation-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, var(--card-bg) 0%, #121212 100%);
+}
+
+.motivation-grid {
+    /* Motivatieblokken in responsive grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+/* Card voor motivatie content */
+.motivation-card {
+    background: #141414;
+    border: 1px solid #2b2b2b;
+    border-radius: 14px;
+    padding: 28px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.motivation-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+}
+
+.motivation-card h3 {
+    color: var(--secondary-color);
+    margin-bottom: 12px;
+}
+
+.internship-section {
+    padding: 70px 0 110px;
+    background: linear-gradient(160deg, #101010 0%, #0a0a0a 100%);
+}
+
+.internship-box {
+    /* Uitgelicht blok voor stage-oproep */
+    background: linear-gradient(135deg, rgba(227, 30, 36, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%);
+    border: 1px solid rgba(227, 30, 36, 0.5);
+    border-radius: 18px;
+    padding: 40px;
+    text-align: center;
+}
+
+.internship-label {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.internship-box h2 {
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+
+.internship-box p {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    color: #e4e4e4;
+}
+
+.internship-tags {
+    /* Lijst met vaardigheids-tags */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+/* ===== ABOUT PAGE ===== */
+.about-section,
+.projects-section,
+.contact-section {
+    padding: 120px 20px 80px;
+    min-height: 100vh;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 3rem;
+}
+
+.about-content {
+    /* Verticale layout voor over-mij onderdelen */
+    display: grid;
+    gap: 40px;
+}
+
+/* Informatieve kaart op de over-mij pagina */
+.about-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid var(--primary-color);
+    animation: slideInLeft 0.8s ease;
+}
+
+.about-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.skills-section {
+    /* Tweede kaart met skills */
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    animation: slideInRight 0.8s ease;
+}
+
+.skill-bars {
+    margin-top: 30px;
+}
+
+.skill {
+    margin-bottom: 25px;
+}
+
+.skill-name {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.skill-bar {
+    /* Achtergrondrail van een skill meter */
+    width: 100%;
+    height: 10px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Gevulde voortgang van een skill meter */
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    animation: fillBar 1.5s ease forwards;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* ===== PROJECTS PAGE ===== */
+.projects-grid {
+    /* Projecten in kaartgrid */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Individuele projectkaart */
+.project-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    animation: projectFadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+
+.project-card {
+    transform: translateY(20px);
+}
+
+.project-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 40px rgba(227, 30, 36, 0.4);
+    transform: translateY(-10px) !important;
+}
+
+.project-image {
+    /* Vaste afbeeldingszone bovenin projectkaart */
+    height: 200px;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-img {
+    font-size: 4rem;
+}
+
+.project-content {
+    padding: 25px;
+}
+
+.project-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.project-tags {
+    /* Labels onder elk project */
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* ===== CONTACT PAGE ===== */
+.contact-content {
+    /* Contactlayout gecentreerd op 1 kolom */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    justify-items: center;
+}
+
+/* Hoofdkaart met contactgegevens */
+.contact-info {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid var(--primary-color);
+    width: min(100%, 760px);
+}
+
+.contact-info h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.contact-items {
+    margin: 30px 0;
+}
+
+.contact-item {
+    /* Rij met icoon + waarde (mail, tel, locatie) */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Klikbare contactwaarden (mailto/tel) */
+.contact-link {
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.contact-link:hover {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+}
+
+.social-links {
+    /* Rij met social knoppen */
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.social-link {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(227, 30, 36, 0.5);
+}
+
+/* ===== ANIMATIONS (KEYFRAMES) ===== */
+/* Loader ring rotatie tijdens laden */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Navbar komt van boven in beeld */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Beweging van de hero achtergrondgradient */
+@keyframes energyMove {
+    0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
+    50% { transform: translate(10%, 10%) rotate(180deg); }
+}
+
+/* Hero content fade-in vanaf onder */
+@keyframes heroAppear {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subtiele op-en-neer animatie van de hero titel */
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Zweefeffect op feature cards */
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* About kaart schuift van links naar binnen */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Skills kaart schuift van rechts naar binnen */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Skill bars vullen van 0 naar ingestelde breedte */
+@keyframes fillBar {
+    from { width: 0; }
+}
+
+/* Project cards faden en schuiven in beeld */
+@keyframes projectFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE (MEDIA QUERY) ===== */
+/* Mobiele layout en typografie voor schermen t/m 768px */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .navbar {
+        padding: 20px;
+    }
+    
+    .nav-menu {
+        gap: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .internship-box {
+        padding: 28px 20px;
+    }
+
+    .internship-box h2 {
+        font-size: 1.5rem;
+    }
+    
+}
